@@ -95,7 +95,7 @@ Source: [RateYourMusic.com](https://rateyourmusic.com) · Collected as of April 
 
 ### Countries Represented
 - **Total unique countries:** 25
-- Top countries: USA, UK, Japan, France, Germany
+- Top countries: USA, UK, Japan, Canada, Germany
 
 ---
 

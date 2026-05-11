@@ -5,7 +5,7 @@ Interactive Power BI dashboard analyzing the Top 500 best-reviewed albums on Rat
 
 **Top 500 Best Reviewed Albums of All Time**  
 Source: [RateYourMusic.com](https://rateyourmusic.com) · Collected as of April 21, 2026
-![Dashboard Preview](assets/Dashboard%20Albums%20Official.png)
+![Dashboard Preview](assets/Dashboard Albums Official.png)
 ---
 
 ## Dataset Overview

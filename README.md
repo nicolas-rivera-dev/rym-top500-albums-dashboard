@@ -107,12 +107,14 @@ Source: [RateYourMusic.com](https://rateyourmusic.com) · Collected as of April 
 | KPI — Total Artists | `Artist` (DISTINCTCOUNT) |
 | KPI — Total Countries | `Country` (DISTINCTCOUNT) |
 | KPI — Average Rating | `Rating` (AVERAGE) |
-| KPI — Top Genre | `Genre` (MODE/top value) |
-| Bar chart — Artists with most albums | `Artist`, COUNT |
-| Map — Countries with most albums | `Country`, COUNT (Bing Maps) |
-| Bar+Line combo — Albums and avg rating by decade | `Decade`, COUNT, AVERAGE(`Rating`) |
-| Bar chart — Albums by genre/subgenre | `Genre`, `Subgenre`, COUNT |
-| Ranking table | `Ranking`, `Album Title`, `Artist`, `Rating` |
+| KPI — Top Genre | FIRSTNONBLANK(TOPN(1, VALUES('Albums'[Genre]), CALCULATE(COUNTROWS('Albums')), DESC), 1) |
+| Bar chart — Artists with most albums | X-Axis `Album Title` (COUNT) | Y-Axis `Artist` |
+| Map (Azure) — Countries with most albums | Location `Country` | Size `Album Title` (COUNT) | Tooltips `Album Title` (COUNT) |
+| Data table — Ranking table | `Ranking`, `Album Title`, `Artist`, `Rating` |
+| Bar+Line combo — Albums and average rating by decade | X-Axis `Decade`| Y-Axis Column `Album Title` (COUNT) | Y-Axis Line `Rating` (AVERAGE) |
+| Bar chart — Albums by genre/subgenre | X-Axis `Album Title` (COUNT) | Y-Axis `Genre` |
+
+---
 
 **Slicers/Filters:**
 - Genre
@@ -126,23 +128,7 @@ Source: [RateYourMusic.com](https://rateyourmusic.com) · Collected as of April 
 ## DAX Measures Used
 
 ```dax
-Total Albums = COUNTROWS(Albums)
-
-Total Artists = DISTINCTCOUNT(Albums[Artist])
-
-Total Countries = DISTINCTCOUNT(Albums[Country])
-
-Average Rating = AVERAGE(Albums[Rating])
-
-Top Genre = 
-FIRSTNONBLANK(
-    TOPN(1, ALL(Albums[Genre]), CALCULATE(COUNTROWS(Albums))),
-    1
-)
-
-Albums by Decade = CALCULATE(COUNTROWS(Albums), ALLEXCEPT(Albums, Albums[Decade]))
-
-Avg Rating by Decade = CALCULATE(AVERAGE(Albums[Rating]), ALLEXCEPT(Albums, Albums[Decade]))
+Top Genre = FIRSTNONBLANK(TOPN(1, VALUES('Albums'[Genre]), CALCULATE(COUNTROWS('Albums')), DESC), 1)
 ```
 
 ---
